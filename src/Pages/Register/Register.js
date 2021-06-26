@@ -1,14 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Register.css'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import AmazonLogo from '../../Amazon_Logo.png'
+import { useSelector, useDispatch } from 'react-redux'
+import { registerInitiate } from '../../Redux/actions'
 
 const Register = () => {
   const [email, setEmail] = useState('')
-  const [pass, setPass] = useState('')
+  const [password, setPassword] = useState('')
+
+  const { user } = useSelector((state) => state.data)
+
+  const history = useHistory()
+  // console.log(user)
+  useEffect(() => {
+    if (user) {
+      history.push('/')
+    }
+  }, [user, history])
+
+  let dispatch = useDispatch()
 
   const register = (e) => {
     e.preventDefault()
+    dispatch(registerInitiate(email, password))
+    setEmail('')
+    setPassword('')
   }
 
   return (
@@ -29,8 +46,8 @@ const Register = () => {
             <h5>Password</h5>
             <input
               type='password'
-              value={pass}
-              onChange={(e) => setPass(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <button type='submit' onClick={register} className='continue'>
               Continue

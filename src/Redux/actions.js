@@ -15,11 +15,11 @@ const registerError = (error) => ({
   payload: error,
 })
 
-export const registerInitiate = (email, pass) => {
+export const registerInitiate = (email, password) => {
   return function (dispatch) {
     dispatch(registerStart())
     auth
-      .createUserWithEmailAndPassword(email, pass)
+      .createUserWithEmailAndPassword(email, password)
       .then(({ user }) => {
         dispatch(registerSuccess(user))
       })
