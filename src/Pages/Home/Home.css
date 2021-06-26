@@ -8,8 +8,8 @@
 
 .item-container {
   display: flex;
-  color: white;
-  background-color: #2b2727;
+  color: black;
+  background-color: #fff;
 }
 
 .item-container p {
